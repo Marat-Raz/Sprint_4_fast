@@ -33,7 +33,7 @@ public class TestOrderScooter {
         @Test
         public void testMainPageImportantQuestions() {   //  Тест первой строки раздела «Вопросы о важном
             OrderScooter tester = new OrderScooter(driver);
-            tester.openPage_ClickOrderButton(varButton);
+            tester.openPageAndClickOrderButton(varButton);
             tester.InputAllTextScooterFor("Андрей", "Авчинников", "Вишневского д.5","Бульвар Рокоссовского", "89274350870");
             tester.ClickBelowButton();
             tester.waitOrderButton();

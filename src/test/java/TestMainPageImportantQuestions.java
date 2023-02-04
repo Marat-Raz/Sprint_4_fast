@@ -13,8 +13,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 @RunWith(Parameterized.class)
 public class TestMainPageImportantQuestions {
     private WebDriver driver;
-    private static final By MAIN_QUESTIONS = By.xpath    //Раздел "Вопросы о важном"
-            ("//div[@class=\"accordion\"]");
     private static String TXT_0 = "Сутки — 400 рублей. Оплата курьеру — наличными или картой."; // Соответствующий текст 1-ой строки раздела "Вопросы о важном"
     private static String TXT_1 = "Пока что у нас так: один заказ — один самокат. Если хотите покататься с " + // Соответствующий текст 2-ой строки раздела «Вопросы о важном
             "друзьями, можете просто сделать несколько заказов — один за другим.";
@@ -31,7 +29,7 @@ public class TestMainPageImportantQuestions {
             "записки тоже не попросим. Все же свои."; // Соответствующий текст 7-ой строки раздела «Вопросы о важном
     private static String TXT_7 = "Да, обязательно. Всем самокатов! И Москве, и Московской области."; // Соответствующий текст 8-ой строки раздела «Вопросы о важном
     private static final By ACCORDION_HEADING_0 = By.xpath
-            ("//*[text()=\"Сколько это стоит? И как оплатить?\"]");
+            ("//*[text()=\"Сколько это стоит? И как оплатить?\"]"); // 1-я строка раздела «Вопросы о важном
     private static final By ACCORDION_HEADING_1 = By.xpath
             ("//*[text()=\"Хочу сразу несколько самокатов! Так можно?\"]"); // 2-я строка раздела «Вопросы о важном
     private static final By ACCORDION_HEADING_2 = By.xpath
@@ -71,12 +69,11 @@ public class TestMainPageImportantQuestions {
         };
     }
     @Test
-    public void testMainPageImportantQuestions() {   //  Тест первой строки раздела «Вопросы о важном
+    public void testMainPageImportantQuestions() {
         MainPageImportantQuestions tester = new MainPageImportantQuestions(driver);
-        tester.openPage_scrollToImportantQuestions();
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(MAIN_QUESTIONS));
-        String foundText = tester.clickAccordionHeading_getText(accordionHeading);
+        tester.openPageAndScrollToImportantQuestions();
+        tester.waitVisibilityImportantQuestions();
+        String foundText = tester.clickAccordionHeadingAndGetText(accordionHeading);
         Assert.assertEquals("Фактический текст не соответствует ожидаемому!", expectedText, foundText);
     }
 

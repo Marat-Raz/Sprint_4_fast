@@ -38,7 +38,7 @@ public class OrderScooter {
         this.driver = driver;
     }
 
-    public void openPage_ClickOrderButton(By order_button) {
+    public void openPageAndClickOrderButton(By order_button) {
         driver.get("https://qa-scooter.praktikum-services.ru/");
         driver.findElement(CookieButton).click();
         WebElement element = driver.findElement(order_button);
