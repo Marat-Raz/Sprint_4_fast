@@ -1,4 +1,5 @@
 import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -40,12 +41,15 @@ public class OrderScooter {
     public void openPage_ClickOrderButton(By order_button) {
         driver.get("https://qa-scooter.praktikum-services.ru/");
         driver.findElement(CookieButton).click();
-        WebElement element = driver.findElement(By.className("Home_FinishButton__1_cWm"));
+        WebElement element = driver.findElement(order_button);
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", element);
-        driver.findElement(order_button).click();
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
+        wait.until(ExpectedConditions.elementToBeClickable(order_button));
+        element.click();
+        //WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
         wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(BELOW_BUTTON));
     }
+
 
     private void inputText(By input, String variableText) {
         driver.findElement(input).clear();
