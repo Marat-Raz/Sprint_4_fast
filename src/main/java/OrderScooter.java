@@ -9,7 +9,6 @@ import java.time.Duration;
 public class OrderScooter {
     private WebDriver driver;
     private static final By CookieButton = By.xpath("//*[@id=\"rcc-confirm-button\"]"); // Кнопка "да все привыкли"
-
     private static final By INPUT_NAME = By.xpath   //Поле ввода "Имя"
             ("//input[@class=\"Input_Input__1iN_Z Input_Responsible__1jDKN\"][@placeholder=\"* Имя\"]");
     private static final By INPUT_SURNAME = By.xpath    //Поле ввода "Фамилия"
@@ -28,11 +27,9 @@ public class OrderScooter {
             ("//div[@class=\"Dropdown-control\"]");
     private static final By ORDER_BUTTON = By.xpath  //Кнопка "Заказать"
             ("//button[@class=\"Button_Button__ra12g Button_Middle__1CSJM\"]");
-
     private static final By YES_BUTTON = By.xpath  //Кнопка "Да"
             ("//button[text()=\"Да\"]");
-    private static final By VIEW_STATUS_BUTTON = By.xpath  //Кнопка "Посмотреть статус"
-            ("//button[text()=\"Посмотреть статус\"]");
+    private static final By ORDER_PLACED = By.xpath("//div[text()=\"Заказ оформлен\"]"); // Заголовок "Заказ оформлен";
 
     public OrderScooter(WebDriver driver) {
         this.driver = driver;
@@ -46,22 +43,17 @@ public class OrderScooter {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
         wait.until(ExpectedConditions.elementToBeClickable(order_button));
         element.click();
-        //WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
         wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(BELOW_BUTTON));
     }
-
-
     private void inputText(By input, String variableText) {
         driver.findElement(input).clear();
         driver.findElement(input).sendKeys(variableText);
     }
-
     private void inputTextForSelect(By inputSelect, String variableTextForSelect) {
         driver.findElement(inputSelect).clear();
         driver.findElement(inputSelect).sendKeys(variableTextForSelect + Keys.ARROW_DOWN + Keys.ENTER);
 
     }
-
     public void InputAllTextScooterFor(String name, String surName, String address, String metroStation, String phoneNumber) {
         inputText(INPUT_NAME, name);
         inputText(INPUT_SURNAME, surName);
@@ -104,8 +96,9 @@ public class OrderScooter {
     }
     public void ClickYesButton () {
         driver.findElement(YES_BUTTON).click();
-     //   WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
-     //   wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath("//div[text()=\"Заказ оформлен\"]")));
+         }
+    public boolean orderPlacedIsDisplay () {
+        boolean isDisplayed = driver.findElement(ORDER_PLACED).isDisplayed();
+        return isDisplayed;
     }
-
 }

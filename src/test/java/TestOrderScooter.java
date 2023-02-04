@@ -14,8 +14,7 @@ public class TestOrderScooter {
     private static final By BUTTON_2 = By.xpath("//div[@class=\"Home_FinishButton__1_cWm\"]//button[text()=\"Заказать\"]"); // Нижняя кнопка "Заказать";
     private static By varButton;
   // private final boolean result;
-    final By ORDER_PLACED = By.xpath("//div[text()=\"Заказ оформлен\"]"); // Заголовок "Заказ оформлен";
-    public TestOrderScooter(By varButton) {
+        public TestOrderScooter(By varButton) {
         this.varButton = varButton;
      //   this.result = result;
     }
@@ -41,8 +40,7 @@ public class TestOrderScooter {
             tester.ClickOrderButton();
             tester.waitYesButton();
             tester.ClickYesButton();
-            boolean isDisplayed = driver.findElement(ORDER_PLACED).isDisplayed();
-            Assert.assertTrue(isDisplayed);
+            Assert.assertTrue(tester.orderPlacedIsDisplay());
         }
             public void teardown() {
             driver.quit();
