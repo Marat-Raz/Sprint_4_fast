@@ -13,11 +13,11 @@ public class TestOrderScooter {
     private static final By BUTTON_1 = By.className("Button_Button__ra12g"); // Верхняя кнопка "Заказать";
     private static final By BUTTON_2 = By.xpath("//div[@class=\"Home_FinishButton__1_cWm\"]//button[text()=\"Заказать\"]"); // Нижняя кнопка "Заказать";
     private static By varButton;
-    private final boolean result;
+  // private final boolean result;
     final By ORDER_PLACED = By.xpath("//div[text()=\"Заказ оформлен\"]"); // Заголовок "Заказ оформлен";
-    public TestOrderScooter(By varButton, boolean result) {
+    public TestOrderScooter(By varButton) {
         this.varButton = varButton;
-        this.result = result;
+     //   this.result = result;
     }
     @Before
     public void setUp() {
@@ -26,8 +26,8 @@ public class TestOrderScooter {
     @Parameterized.Parameters
     public static Object[][] getCredentials() {
         return new Object[][]{
-                {BUTTON_1, true},
-                {BUTTON_2, true},
+                {BUTTON_1},
+                {BUTTON_2},
         };
     }
         @Test
